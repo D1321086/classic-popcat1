@@ -79,15 +79,24 @@
 
             showClosed();
 
+            const popAudio = new Audio('pops/pop1.mp3');
+
             if (countEl) {
                 countEl.addEventListener('mousedown', function (e) {
+                    try { popAudio.currentTime = 0; } catch (err) {}
+                    popAudio.play().catch(() => {});
                     increment();
                     showOpen();
                 });
             }
 
+            let closeTimeout = null;
             document.addEventListener('mouseup', function () {
-                showClosed();
+                if (closeTimeout) clearTimeout(closeTimeout);
+                closeTimeout = setTimeout(function () {
+                    showClosed();
+                    closeTimeout = null;
+                }, 25);
             });
 
             window.increment = increment;
