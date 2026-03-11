@@ -55,5 +55,42 @@
             <div class="cat-ing" id="p">0</div>
             <div id="op"></div>
         </div>
+        <script>
+            let count = 0;
+            const countEl = document.getElementById('p');
+
+            console.log(count);
+
+            function increment() {
+                count++;
+                if (countEl) countEl.textContent = count;
+                console.log(count);
+            }
+
+            const pImage = "url('imgs/p.png')";
+            const opImage = "url('imgs/op.png')";
+
+            function showOpen() {
+                if (countEl) countEl.style.backgroundImage = opImage;
+            }
+            function showClosed() {
+                if (countEl) countEl.style.backgroundImage = pImage;
+            }
+
+            showClosed();
+
+            if (countEl) {
+                countEl.addEventListener('mousedown', function (e) {
+                    increment();
+                    showOpen();
+                });
+            }
+
+            document.addEventListener('mouseup', function () {
+                showClosed();
+            });
+
+            window.increment = increment;
+        </script>
     </body>
 </html>
